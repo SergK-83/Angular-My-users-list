@@ -1,0 +1,25 @@
+<div class="list-box">
+  <div class="list-box__header">
+    <div class="list-box__item">
+      <div class="list-box__item-col">First Name</div>
+      <div class="list-box__item-col">Last Name</div>
+      <div class="list-box__item-col">Email</div>
+      <div class="list-box__item-col">Phone</div>
+      <div class="list-box__item-col">Company</div>
+      <div class="list-box__item-col list-box__item-col_action"></div>
+    </div>
+  </div>
+  <div class="list-box__body" *ngIf="users$ | async as users else loader">
+    <app-user-item
+      *ngFor="let user of users"
+      [user]="user"
+    ></app-user-item>
+  </div>
+
+  <ng-template #loader>
+    <div class="loader-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+</div>
