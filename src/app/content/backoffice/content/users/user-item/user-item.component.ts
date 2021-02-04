@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IUser} from '../users.service';
+import {IUser} from '../../../services/users.service';
 
 @Component({
   selector: 'app-user-item',
@@ -10,8 +10,6 @@ export class UserItemComponent implements OnInit {
 
   @Input()
   public user: IUser = {} as IUser;
-
-  public isFavorite = false;
 
   constructor() { }
 

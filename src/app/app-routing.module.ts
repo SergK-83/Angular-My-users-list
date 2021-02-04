@@ -13,8 +13,8 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./content/login/login.module').then((m) => m.LoginModule)
   },
   {
-    path: 'workspace',
-    loadChildren: () => import('./content/workspace/workspace.module').then((m) => m.WorkspaceModule)
+    path: 'backoffice',
+    loadChildren: () => import('./content/backoffice/backoffice.module').then((m) => m.BackofficeModule)
   },
   {
     path: '**',
@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
   ],
   exports: [
     RouterModule

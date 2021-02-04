@@ -11,7 +11,7 @@
   </div>
   <div class="list-box__body" *ngIf="users$ | async as users else loader">
     <app-user-item
-      *ngFor="let user of users"
+      *ngFor="let user of users | usersFilter:searchTextUser:onlyFavorites"
       [user]="user"
     ></app-user-item>
   </div>

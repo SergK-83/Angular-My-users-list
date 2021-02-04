@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {UsersService} from '../../services/users.service';
 
 @Component({
   selector: 'app-search-box',
@@ -9,12 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class SearchBoxComponent implements OnInit {
   public searchText = '';
 
-  constructor() { }
+  @Output()
+  public onSearched = new EventEmitter<string>();
+
+  constructor(
+    private userService: UsersService
+  ) { }
 
   ngOnInit(): void {
   }
 
   public search(event: Event): void {
     this.searchText = (event.target as HTMLInputElement).value;
+    this.userService.searchTextUser.next(this.searchText);
   }
 }

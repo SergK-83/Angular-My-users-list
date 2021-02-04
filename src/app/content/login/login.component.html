@@ -4,11 +4,11 @@
       <form #formLogin="ngForm">
         <p>Log in to continue</p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" ngModel name="username" required minlength="3" #nameControl="ngModel" appUsernameValidator>
+          <input type="text" matInput placeholder="Username" ngModel name="username" required minlength="3" #nameControl="ngModel" appUsernameValidator value="User">
           <mat-error *ngIf="nameControl.errors && nameControl.errors.username">{{nameControl.errors.username}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input type="password" #passwordControl="ngModel" matInput placeholder="Password" ngModel name="password" required>
+          <input type="password" #passwordControl="ngModel" matInput placeholder="Password" ngModel name="password" required value="123">
           <mat-error *ngIf="passwordControl.errors && passwordControl.errors.password">{{passwordControl.errors.password}}</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="login(formLogin)" [disabled]="formLogin.invalid">Login</button>

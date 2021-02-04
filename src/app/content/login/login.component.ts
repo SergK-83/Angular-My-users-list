@@ -25,7 +25,7 @@ export class LoginComponent {
     this.validationService.checkUser(form.value).subscribe(
       res => {
         if (!res.data) {
-          this.router.navigate(['/workspace']);
+          this.router.navigate(['/backoffice']);
         } else {
           if (res.data.username) {
             form.form.controls.username.setErrors({username: res.data.username});
