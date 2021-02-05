@@ -1,6 +1,6 @@
 <div class="list-box__item list-box__body-item"
      [ngClass]="{'list-box__item_favorite': user.isFavorite}"
-     (click)="user.isFavorite = !user.isFavorite"
+     (click)="toggleFavorite()"
 >
   <div class="list-box__item-col">{{user.first_name}}</div>
   <div class="list-box__item-col">{{user.last_name}}</div>

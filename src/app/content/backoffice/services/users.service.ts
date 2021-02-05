@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 export interface IUser {
   id: number;
@@ -11,18 +10,17 @@ export interface IUser {
   phone_number: string;
   picture_url: string;
   company_name: string;
-  isFavorite?: boolean;
 }
 
 @Injectable()
 export class UsersService {
-  public searchTextUser: Subject<string> = new Subject();
-  public onlyFavorites: Subject<boolean> = new Subject();
+  public searchTextUser: BehaviorSubject<string> = new BehaviorSubject('');
+  public onlyFavorites: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public favoritesUsersIds: BehaviorSubject<number[]> = new BehaviorSubject([]);
 
   constructor(
     private http: HttpClient
   ) {
-    this.onlyFavorites.next(false);
   }
 
   public getUsers(): Observable<IUser[]> {

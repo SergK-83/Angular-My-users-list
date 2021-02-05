@@ -6,14 +6,12 @@ import {IUser} from './users.service';
 })
 export class UsersFilterPipe implements PipeTransform {
 
-  transform(users: IUser[], searchText: string, isFavorite: boolean = false): IUser[] {
-
-    console.log(isFavorite);
+  transform(users: IUser[], searchText: string, onlyFavorites: boolean = false, favoritesUsersIds: number[]): IUser[] {
 
     let result: IUser[] = users;
 
-    if (isFavorite) {
-      result = result.filter((user: IUser) => user.isFavorite);
+    if (onlyFavorites) {
+      result = result.filter((user: IUser) => favoritesUsersIds.includes(user.id));
     }
 
     if (!searchText) {
