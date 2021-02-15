@@ -18,6 +18,14 @@ export class UsersComponent {
   public onlyFavorites: boolean;
   public favoritesUsersIds: any;
   private fetchedUsers$ = this.usersService.getUsers();
+  public usersCount: number;
+  public currentPage = 1;
+  public perPage = 10;
+  public startUserIndex = 0;
+  public lastUserIndex = this.perPage;
+  public isFirstPage = true;
+  public isLastPage: boolean;
+
 
   constructor(
     private usersService: UsersService
@@ -33,11 +41,47 @@ export class UsersComponent {
       usersService.onlyFavorites
     ]).pipe(
       map(([fetchedUsers, searchTextUser, favoritesUsersIds, onlyFavorites]) => {
-        return fetchedUsers.map(user => ({
+        const updatedUsersList = fetchedUsers.map(user => ({
           ...user,
           isFavorite: favoritesUsersIds.includes(user.id)
-        })).filter(user => !onlyFavorites || user.isFavorite);
+        }))
+
+          .filter(user => (!onlyFavorites || user.isFavorite) && `${user.first_name} ${user.last_name} ${user.email} ${user.phone_number} ${user.company_name}`.toLowerCase().includes(searchTextUser.toLowerCase()));
+
+        this.usersCount = updatedUsersList.length;
+
+        return updatedUsersList;
       })
     );
+  }
+
+  public nextPage(): void {
+    if (this.isLastPage) {
+      return;
+    }
+
+    this.startUserIndex += this.lastUserIndex;
+    this.lastUserIndex += this.perPage;
+
+    if (this.lastUserIndex > this.usersCount) {
+      this.isLastPage = true;
+    }
+  }
+
+  public prevPage(): void {
+    if (this.isFirstPage) {
+      return;
+    }
+
+    this.startUserIndex -= this.perPage;
+    this.lastUserIndex -= this.perPage;
+
+    if (this.startUserIndex < 0) {
+      this.isFirstPage = true;
+    }
+  }
+
+  public selectPage(): void {
+
   }
 }

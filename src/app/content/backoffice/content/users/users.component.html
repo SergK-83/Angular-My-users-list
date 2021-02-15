@@ -11,10 +11,20 @@
   </div>
   <div class="list-box__body" *ngIf="users$ | async as users else loader">
     <app-user-item
-      *ngFor="let user of users"
+      *ngFor="let user of users | slice:startUserIndex:lastUserIndex"
       [user]="user"
     ></app-user-item>
   </div>
+
+  <app-pagination
+    *ngIf="users$ | async as users"
+    [currentPage]="currentPage"
+    [itemsTotalCount]="users.length"
+    [perPage]="perPage"
+    (goPrev)="prevPage()"
+    (goNext)="nextPage()"
+    (goPage)="selectPage()"
+  ></app-pagination>
 
   <ng-template #loader>
     <div class="loader-container">

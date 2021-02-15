@@ -8,6 +8,7 @@ import {UsersComponent} from './content/users/users.component';
 import {UserItemComponent} from './content/users/user-item/user-item.component';
 import {SearchBoxComponent} from './content/search-box/search-box.component';
 import { UsersFilterPipe } from './services/users-filter.pipe';
+import { PaginationComponent } from './content/pagination/pagination.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UsersFilterPipe } from './services/users-filter.pipe';
     SearchBoxComponent,
     UsersComponent,
     UserItemComponent,
-    UsersFilterPipe
+    UsersFilterPipe,
+    PaginationComponent
   ],
   imports: [
     SharedModule,

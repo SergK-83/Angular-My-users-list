@@ -1,0 +1,22 @@
+<div class="pagination">
+
+  <button class="pagination__btn pagination__arrow"
+          (click)="onPrev()"
+  >
+    <
+  </button>
+
+  <button class="pagination__btn pagination__page pagination__page_active"
+          *ngFor="let page of getPages(); let i = index"
+          (click)="onPage()"
+  >
+    {{i + 1}}
+  </button>
+
+  <button class="pagination__btn pagination__arrow"
+          (click)="onNext()"
+  >
+    >
+  </button>
+
+</div>
