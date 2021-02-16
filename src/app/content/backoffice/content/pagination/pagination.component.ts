@@ -11,6 +11,7 @@ export class PaginationComponent implements OnInit {
   @Input() itemsTotalCount: number;
   @Input() perPageOptions: number[];
   @Input() perPage: number;
+  @Input() pagesToShow: number;
 
   @Output() goPrev = new EventEmitter();
   @Output() goNext = new EventEmitter();
@@ -28,8 +29,13 @@ export class PaginationComponent implements OnInit {
     this.pagesCount = Math.ceil(this.itemsTotalCount / this.perPage);
   }
 
-  public getPages(): any {
-    return new Array(this.pagesCount);
+  public getPages(): number[] {
+    const pages: number[] = [];
+
+    for (let i = 1; i <= this.pagesToShow; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
   public changePerPageOption(countOnPage: number): void {

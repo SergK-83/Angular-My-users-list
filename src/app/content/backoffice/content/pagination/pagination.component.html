@@ -6,12 +6,23 @@
     <
   </button>
 
-  <button class="pagination__btn pagination__btn_page"
-          *ngFor="let page of getPages(); let i = index"
-          (click)="onPage(i + 1)"
-          [ngClass]="{'pagination__page_active' : currentPage === i + 1}"
+  <button class="pagination__btn"
   >
-    {{i + 1}}
+    ...
+  </button>
+
+  <button class="pagination__btn pagination__btn_page"
+          *ngFor="let page of getPages()"
+          (click)="onPage(page)"
+          [ngClass]="{'pagination__page_active' : currentPage === page}"
+  >
+    {{page}}
+  </button>
+
+  <button class="pagination__btn "
+          (click)="onPrev()"
+  >
+    ...
   </button>
 
   <button class="pagination__btn pagination__btn_arrow"
