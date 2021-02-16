@@ -20,10 +20,12 @@
     *ngIf="users$ | async as users"
     [currentPage]="currentPage"
     [itemsTotalCount]="users.length"
+    [perPageOptions]="perPageOptions"
     [perPage]="perPage"
     (goPrev)="prevPage()"
     (goNext)="nextPage()"
-    (goPage)="selectPage()"
+    (selectPage)="selectPage($event)"
+    (changeUsersOnPage)="changeUsersOnPage($event)"
   ></app-pagination>
 
   <ng-template #loader>

@@ -72,7 +72,7 @@ search-box
 
 /*
 =========================================
-backoffice
+workspace
 =========================================
 */
 
@@ -237,10 +237,15 @@ pagination
 
 .pagination-wrap {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-top: 30px;
 }
 
 .pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
   margin-right: 50px;
 }
 
@@ -251,11 +256,15 @@ pagination
   cursor: pointer;
 }
 
-.pagination__arrow {
+.pagination__btn:hover {
+  background-color: #efefef;
+}
+
+.pagination__btn_arrow {
   color: #777;
 }
 
-.pagination__page {
+.pagination__btn_page {
   font-size: 11px;
   font-weight: 600;
   padding: 5px 10px;

@@ -19,13 +19,13 @@ export class UsersComponent {
   public favoritesUsersIds: any;
   private fetchedUsers$ = this.usersService.getUsers();
   public usersCount: number;
+  public perPageOptions = [5, 10, 15, 20];
   public currentPage = 1;
-  public perPage = 10;
+  public perPage = this.perPageOptions[0];
   public startUserIndex = 0;
   public lastUserIndex = this.perPage;
   public isFirstPage = true;
-  public isLastPage: boolean;
-
+  public isLastPage = false;
 
   constructor(
     private usersService: UsersService
@@ -45,7 +45,6 @@ export class UsersComponent {
           ...user,
           isFavorite: favoritesUsersIds.includes(user.id)
         }))
-
           .filter(user => (!onlyFavorites || user.isFavorite) && `${user.first_name} ${user.last_name} ${user.email} ${user.phone_number} ${user.company_name}`.toLowerCase().includes(searchTextUser.toLowerCase()));
 
         this.usersCount = updatedUsersList.length;
@@ -60,10 +59,15 @@ export class UsersComponent {
       return;
     }
 
-    this.startUserIndex += this.lastUserIndex;
+    this.currentPage++;
+
+    // tslint:disable-next-line:no-unused-expression
+    this.isFirstPage ? this.isFirstPage = false : null;
+
+    this.startUserIndex += this.perPage;
     this.lastUserIndex += this.perPage;
 
-    if (this.lastUserIndex > this.usersCount) {
+    if (this.lastUserIndex >= this.usersCount) {
       this.isLastPage = true;
     }
   }
@@ -73,15 +77,40 @@ export class UsersComponent {
       return;
     }
 
+    this.currentPage--;
+
+    // tslint:disable-next-line:no-unused-expression
+    this.isLastPage ? this.isLastPage = false : null;
+
     this.startUserIndex -= this.perPage;
     this.lastUserIndex -= this.perPage;
 
-    if (this.startUserIndex < 0) {
+    if (this.startUserIndex <= 0) {
       this.isFirstPage = true;
     }
   }
 
-  public selectPage(): void {
+  public selectPage(pageNumber: number): void {
 
+    this.currentPage = pageNumber;
+    this.startUserIndex = (pageNumber - 1) * this.perPage;
+    this.lastUserIndex = this.startUserIndex + this.perPage;
+
+    if (this.startUserIndex <= 0) {
+      this.isFirstPage = true;
+    }
+
+    if (this.lastUserIndex >= this.usersCount) {
+      this.isLastPage = true;
+    }
+  }
+
+  public changeUsersOnPage(countItemsOnPage: number): void {
+    this.perPage = countItemsOnPage;
+    this.currentPage = 1;
+    this.startUserIndex = 0;
+    this.lastUserIndex = this.perPage;
+    this.isFirstPage = true;
+    this.isLastPage = false;
   }
 }

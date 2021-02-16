@@ -2,7 +2,10 @@
      [ngClass]="{'list-box__item_favorite': user.isFavorite}"
      (click)="toggleFavorite()"
 >
-  <div class="list-box__item-col">{{user.first_name}}</div>
+  <div class="list-box__item-col">
+    <span style="margin-right: 10px;color: #999">{{user.id}}</span>
+    {{user.first_name}}
+  </div>
   <div class="list-box__item-col">{{user.last_name}}</div>
   <div class="list-box__item-col">{{user.email}}</div>
   <div class="list-box__item-col">{{user.phone_number}}</div>
